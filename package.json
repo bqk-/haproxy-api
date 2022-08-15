@@ -15,9 +15,7 @@
     "express": "^4.17.1",
     "fs-extra": "^7.0.1",
     "haproxy-sdk": "^1.0.5",
-    "morgan": "^1.10.0",
-    "passport": "^0.4.1",
-    "passport-headerapikey": "^1.2.2"
+    "morgan": "^1.10.0"
   },
   "description": "API server for HAProxy management",
   "devDependencies": {

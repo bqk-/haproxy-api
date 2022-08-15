@@ -8,9 +8,9 @@ const compression = require("compression");
 const dotenv = require("dotenv");
 const errorHandler = require("errorhandler");
 const logger = require("morgan");
-const passport = require("passport");
-const HeaderAPIKeyStrategy = require("passport-headerapikey")
-  .HeaderAPIKeyStrategy;
+// const passport = require("passport");
+// const HeaderAPIKeyStrategy = require("passport-headerapikey")
+//   .HeaderAPIKeyStrategy;
 const HAProxy = require("haproxy-sdk");
 
 /**
@@ -48,19 +48,19 @@ app.disable("x-powered-by");
 /**
  * Configure authentication
  */
-app.use(passport.initialize({}));
-passport.use(
-  new HeaderAPIKeyStrategy(
-    { header: "Authorization", prefix: "Api-Key " },
-    false,
-    function (apikey, done) {
-      return done(null, apikey === process.env.API_KEY);
-    }
-  )
-);
-app.use((req, res, next) => {
-  passport.authenticate("headerapikey", { session: false })(req, res, next);
-});
+// app.use(passport.initialize({}));
+// passport.use(
+//   new HeaderAPIKeyStrategy(
+//     { header: "Authorization", prefix: "Api-Key " },
+//     false,
+//     function (apikey, done) {
+//       return done(null, apikey === process.env.API_KEY);
+//     }
+//   )
+// );
+// app.use((req, res, next) => {
+//   passport.authenticate("headerapikey", { session: false })(req, res, next);
+// });
 
 /**
  * Add the haproxy object to every request
