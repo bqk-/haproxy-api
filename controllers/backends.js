@@ -146,3 +146,44 @@ let _getServerState = (state) => {
       throw "invalid state";
   }
 };
+
+
+/**
+ * POST /backends/:name/servers/:server/enable
+ */
+ exports.postBackendServerEnable = (req, res) => {
+  if (!req.body) {
+    res.status(400).send("invalid options");
+    return;
+  }
+  res.locals.haproxy
+    .backend(req.params.name)
+    .then((backend) => backend.server(req.params.server))
+    .then(async (server) => {
+        await server.setState(HAProxy.SERVER_ENABLE);
+      return server;
+    })
+    .then((server) => res.json(server.sid))
+    .catch((reason) => {
+      console.log(reason);
+      res.status(400).send(reason);
+    });
+};
+
+/**
+ * POST /backends/:name/servers/:server/disable
+ */
+ exports.postBackendServerDisable = (req, res) => {
+  res.locals.haproxy
+    .backend(req.params.name)
+    .then((backend) => backend.server(req.params.server))
+    .then(async (server) => {
+        await server.setState(HAProxy.SERVER_DISABLE);
+      return server;
+    })
+    .then((server) => res.json(server.sid))
+    .catch((reason) => {
+      console.log(reason);
+      res.status(400).send(reason);
+    });
+};

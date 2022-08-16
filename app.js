@@ -106,6 +106,8 @@ app.get("/backends/:name", backendsController.getBackend);
 app.get("/backends/:name/servers", backendsController.getBackendServers);
 app.post("/backends/:name/servers", backendsController.postBackendServer);
 app.get("/backends/:name/:metric", backendsController.getBackendMetric);
+app.post("/backends/:name/servers/:server/enable", backendsController.postBackendServerEnable);
+app.post("/backends/:name/servers/:server/disable", backendsController.postBackendServerDisable);
 
 app.get("/servers", serversController.get);
 app.get("/servers/:name", serversController.getServer);
